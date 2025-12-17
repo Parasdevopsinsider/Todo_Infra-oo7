@@ -13,3 +13,8 @@ module "public_ip" {
   source  = "../../Modules/azurerm_pip"
   pip_dev = var.pip_devA
 }
+
+module "network_interface" {
+  source  = "../../Modules/azurerm_nic"
+  nic_dev = var.nic_devA
+}
