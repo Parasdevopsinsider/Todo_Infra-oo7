@@ -42,3 +42,29 @@ pip_devA = {
     sku               = "Standard"
   }
 }
+
+nic_devA = {
+  "dev-nic-1" = {
+    nic_name = "dev-nic-001"
+    location = "West US"
+    rg_name  = "dev-rg-001"
+    vnet_name = "dev-vnet-001"
+    subnet_name = "dev-subnet-001"
+    pip_name = "dev-pip-001"
+
+    ip_configuration = [
+      {
+        name                          = "dev-ipconfig-001"
+        subnet_id = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/virtualNetworks/dev-vnet-001/subnets/dev-subnet-001"
+        public_ip_address_id = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/publicIPAddresses/dev-pip-001"
+        private_ip_address_allocation = "Dynamic"
+      }
+    ]
+
+    tags = {
+      environment = "dev"
+      project     = "project-a"
+      owner       = "ashish_sir"
+    }
+  }
+}
