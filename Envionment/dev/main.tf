@@ -18,3 +18,8 @@ module "network_interface" {
   source  = "../../Modules/azurerm_nic"
   nic_dev = var.nic_devA
 }
+
+module "key_vault" {
+  source = "../../Modules/azurerm_key_vault"
+  kv_dev = var.kv_devA
+}
