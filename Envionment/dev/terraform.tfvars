@@ -45,18 +45,18 @@ pip_devA = {
 
 nic_devA = {
   "dev-nic-1" = {
-    nic_name = "dev-nic-001"
-    location = "West US"
-    rg_name  = "dev-rg-001"
-    vnet_name = "dev-vnet-001"
+    nic_name    = "dev-nic-001"
+    location    = "West US"
+    rg_name     = "dev-rg-001"
+    vnet_name   = "dev-vnet-001"
     subnet_name = "dev-subnet-001"
-    pip_name = "dev-pip-001"
+    pip_name    = "dev-pip-001"
 
     ip_configuration = [
       {
         name                          = "dev-ipconfig-001"
-        subnet_id = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/virtualNetworks/dev-vnet-001/subnets/dev-subnet-001"
-        public_ip_address_id = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/publicIPAddresses/dev-pip-001"
+        subnet_id                     = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/virtualNetworks/dev-vnet-001/subnets/dev-subnet-001"
+        public_ip_address_id          = "/subscriptions/your-subscription-id/resourceGroups/dev-rg-001/providers/Microsoft.Network/publicIPAddresses/dev-pip-001"
         private_ip_address_allocation = "Dynamic"
       }
     ]
@@ -66,5 +66,29 @@ nic_devA = {
       project     = "project-a"
       owner       = "ashish_sir"
     }
+  }
+}
+
+
+kv_devA = {
+  "dev-kv-1" = {
+    kv_name   = "dev-kv-001"
+    location  = "West US"
+    rg_name   = "dev-rg-001"
+    sku_name  = "standard"
+    tenant_id = "17fefa14-e7b1-4378-b18d-e3dd81067594"
+    purge_protection_enabled = true
+soft_delete_retention_days = 30
+    access_policies = [{
+      tenant_id = "17fefa14-e7b1-4378-b18d-e3dd81067594"
+      object_id  = "b1a5f8e2-3c4d-4e5f-8a9b-0c1d2e3f4g5h"
+    
+      permissions = {
+        keys         = ["get", "list", "create", "delete", "update", "recover", "backup", "restore", "import"]
+        secrets      = ["get", "list", "set", "delete", "recover", "backup", "restore"]
+        certificates = ["get", "list", "create", "delete", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers"]
+      }
+    }
+    ]
   }
 }
