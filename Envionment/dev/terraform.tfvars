@@ -175,3 +175,27 @@ nsg_devA = {
     ]
   }
 }
+
+sql_server_devA = {
+  "dev-sqlserver-1" = {
+    sql_server_name              = "dev-sqlserver-001"
+    rg_name                      = "dev-rg-001"
+    location                     = "West US"
+    version                      = "12.0"
+    administrator_login          = "parasvm"
+    administrator_login_password = "Parastayde@123"
+  }
+}
+
+sql_database_devA = {
+  "dev-sqldatabase-1" = {
+    sql_database_name = "dev-sqldb-001"
+    rg_name           = "dev-rg-001"
+    sql_server_name   = "dev-sqlserver-001"
+    collation       = "SQL_Latin1_General_CP1_CI_AS"
+    zone_redundant  = false
+    location          = "West US"
+    sku_name          = "S0"
+    max_size_gb       = 10
+  }
+}

@@ -45,3 +45,15 @@ module "network_security_group" {
   source     = "../../Modules/azurerm_nsg"
   nsg_dev    = var.nsg_devA
 }
+
+module "sql_server" {
+  depends_on     = [module.resource_group]
+  source         = "../../Modules/azurerm_sql_server"
+  sql_server_dev = var.sql_server_devA
+}
+
+module "sql_database" {
+  depends_on       = [module.sql_server]
+  source           = "../../Modules/azurerm_sql_database"
+  sql_database_dev = var.sql_database_devA
+}
