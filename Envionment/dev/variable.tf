@@ -9,3 +9,8 @@ variable "nic_devA" {}
 variable "kv_devA" {}
 
 variable "kv_secret_devA" {}
+
+variable "vm_devA" {}
+
+variable "nsg_devA" {}
+

@@ -1,20 +1,23 @@
-resource "azurerm_linux_virtual_machine" "dev_vm" {
-    for_each = var.vm_dev
-    name = each.value.vm_name
-    location = each.value.location
-    resource_group_name = each.value.rg_name
-    network_interface_ids = each.value.nic_ids
-    size = each.value.vm_size
-    admin_username = each.value.admin_username
-    admin_password = each.value.admin_password
-    os_disk {
-        caching              = each.value.os_disk.caching
-        storage_account_type = each.value.os_disk.storage_account_type
-    }
-    source_image_reference {
-        publisher = each.value.source_image_reference.publisher
-        offer     = each.value.source_image_reference.offer
-        sku       = each.value.source_image_reference.sku
-        version   = each.value.source_image_reference.version
-    }
+variable "vm_dev" {
+    description = "A map of virtual machines to create"
+    type = map(object({
+        vm_name = string
+        location = string
+        rg_name = string
+        nic_name = string
+        secret_name = string
+        key_vault_name = string
+        vm_size = string
+        admin_username = string
+        os_disk = object({
+            caching = string
+            storage_account_type = string 
+        })
+        source_image_reference = object({
+            publisher = string
+            offer     = string
+            sku       = string
+            version   = string
+        })
+    }))
 }

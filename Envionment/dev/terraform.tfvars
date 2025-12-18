@@ -128,3 +128,50 @@ kv_secret_devA = {
     secret_value = "Parastayde@123"
   }
 }
+
+vm_devA = {
+  "dev-vm-1" = {
+    vm_name        = "dev-vm-001"
+    location       = "West US"
+    rg_name        = "dev-rg-001"
+    nic_name       = "dev-nic-001"
+    key_vault_name = "dev-kv-001"
+    secret_name    = "Password"
+    vm_size        = "Standard_B1s"
+    admin_username = "parasvm"
+
+    os_disk = {
+      caching              = "ReadWrite"
+      storage_account_type = "Standard_LRS"
+    }
+
+    source_image_reference = {
+      publisher = "Canonical"
+      offer     = "UbuntuServer"
+      sku       = "18.04-LTS"
+      version   = "latest"
+    }
+  }
+}
+
+nsg_devA = {
+  "dev-nsg-1" = {
+    nsg_name = "dev-nsg-001"
+    location = "West US"
+    rg_name  = "dev-rg-001"
+
+    security_rules = [
+      {
+        rule_name                  = "Allow-SSH"
+        priority                   = 100
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      }
+    ]
+  }
+}
