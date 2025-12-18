@@ -1,5 +1,9 @@
 data "azurerm_client_config" "current" {}
 
+output "client_id" {
+  value = data.azurerm_client_config.current.client_id
+}
+
 resource "azurerm_key_vault" "kv1" {
     for_each = var.kv_dev
     name = each.value.kv_name
@@ -11,20 +15,16 @@ resource "azurerm_key_vault" "kv1" {
     soft_delete_retention_days = each.value.soft_delete_retention_days
     tags = lookup(each.value, "tags", null)
 
-    access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    dynamic "access_policy" {
+        for_each = each.value.access_policies
+        content {
+            tenant_id = access_policy.value.tenant_id
+            object_id = access_policy.value.object_id
 
-    key_permissions = [
-      "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy"
-    ]
+                key_permissions      = access_policy.value.permissions.keys
+                secret_permissions    = access_policy.value.permissions.secrets
+                certificate_permissions = access_policy.value.permissions.certificates
+            }
+        }
 
-    secret_permissions = [
-      "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-    ]
-
-    storage_permissions = [
-      "Backup", "Delete", "DeleteSAS", "Get", "GetSAS", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update"
-    ]
-  }
 }
