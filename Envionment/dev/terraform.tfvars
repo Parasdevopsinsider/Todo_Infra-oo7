@@ -72,23 +72,59 @@ nic_devA = {
 
 kv_devA = {
   "dev-kv-1" = {
-    kv_name   = "dev-kv-001"
-    location  = "West US"
-    rg_name   = "dev-rg-001"
-    sku_name  = "standard"
-    tenant_id = "17fefa14-e7b1-4378-b18d-e3dd81067594"
-    purge_protection_enabled = true
-soft_delete_retention_days = 30
+    kv_name                    = "dev-kv-001"
+    location                   = "West US"
+    rg_name                    = "dev-rg-001"
+    sku_name                   = "standard"
+    tenant_id                  = "17fefa14-e7b1-4378-b18d-e3dd81067594"
+    purge_protection_enabled   = true
+    soft_delete_retention_days = 30
     access_policies = [{
       tenant_id = "17fefa14-e7b1-4378-b18d-e3dd81067594"
-      object_id  = "b1a5f8e2-3c4d-4e5f-8a9b-0c1d2e3f4g5h"
-    
+      object_id = "e21b160d-8b35-45d8-8c5f-c90d7fac7a24"
+
       permissions = {
-        keys         = ["get", "list", "create", "delete", "update", "recover", "backup", "restore", "import"]
-        secrets      = ["get", "list", "set", "delete", "recover", "backup", "restore"]
-        certificates = ["get", "list", "create", "delete", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers"]
+        keys = [
+          "Get",
+          "List",
+          "Create",
+          "Delete",
+          "Update",
+          "Recover",
+          "Backup",
+          "Restore",
+          "Import"
+        ]
+        secrets = [
+          "Get",
+          "List",
+          "Set",
+          "Delete",
+          "Recover",
+          "Backup",
+          "Restore"
+        ]
+        certificates = [
+          "Get",
+          "List",
+          "Create",
+          "Delete",
+          "Update",
+          "ManageContacts",
+          "GetIssuers",
+          "ListIssuers",
+          "SetIssuers",
+          "DeleteIssuers"
+        ]
       }
-    }
+      }
     ]
+  }
+}
+
+kv_secret_devA = {
+  secret_devA = {
+    secret_name  = "Password"
+    secret_value = "Parastayde@123"
   }
 }
