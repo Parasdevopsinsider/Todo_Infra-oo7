@@ -1,6 +1,6 @@
 data "azurerm_key_vault" "kv1" {
     for_each = var.kv_secret_dev
-  name                = "dev-kv-001"
+  name                = "dev-kv-001abced"
   resource_group_name = "dev-rg-001"
 }
 
