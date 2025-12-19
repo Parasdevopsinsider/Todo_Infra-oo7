@@ -28,8 +28,14 @@ vnet_devA = {
         subnet_name      = "dev-subnet-001"
         address_prefixes = ["10.0.1.0/24"]
 
-      }
+      } 
     ]
+    subnetsA = [
+  {
+    subnet_name      = "AzureBastionSubnet"
+    address_prefixes = ["10.0.2.0/24"]
+  } 
+]
   }
 }
 
@@ -192,8 +198,8 @@ sql_database_devA = {
     sql_database_name = "dev-sqldb-001"
     rg_name           = "dev-rg-001"
     sql_server_name   = "dev-sqlserver-001"
-    collation       = "SQL_Latin1_General_CP1_CI_AS"
-    zone_redundant  = false
+    collation         = "SQL_Latin1_General_CP1_CI_AS"
+    zone_redundant    = false
     location          = "West US"
     sku_name          = "S0"
     max_size_gb       = 10
