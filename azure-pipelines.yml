@@ -55,6 +55,7 @@ jobs:
   dependsOn: Terraforminitplan
 
   steps:
+  - checkout: self
   - task: tfsec@1
     inputs:
       version: 'v1.26.0'
@@ -64,6 +65,7 @@ jobs:
   dependsOn: TFSec_Scanner
 
   steps:
+  - checkout: self
   - task: TerraformInstaller@1
     inputs:
       terraformVersion: '1.5.7'
@@ -71,7 +73,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'''
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
       backendServiceArm: 'infra_connection'
       backendAzureRmResourceGroupName: 'paras_rg'
       backendAzureRmStorageAccountName: 'parasstg'
