@@ -51,7 +51,8 @@ jobs:
       environmentServiceNameAzureRM: 'infra_connection'
 
 - job: TFSec_Scanner
-  displayName: tfsec
+  displayName: tfsecScanner
+  dependsOn: Terraforminitplan
 
   steps:
   - task: tfsec@1
@@ -60,9 +61,19 @@ jobs:
 
 - job: Terraform_apply
   displayName: Terraform Apply
-  dependsOn: Terraforminitplan
+  dependsOn: TFSec_Scanner
 
   steps:
+  - task: TerraformTaskV4@4
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'''
+      backendServiceArm: 'infra_connection'
+      backendAzureRmResourceGroupName: 'paras_rg'
+      backendAzureRmStorageAccountName: 'parasstg'
+      backendAzureRmContainerName: 'devcont'
+      backendAzureRmKey: 'dev.terraform.tfstate'
   - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
