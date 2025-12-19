@@ -6,7 +6,7 @@ trigger:
 
 jobs:
 - job: Terraforminitplan
-displayname: Terraforminit,fmt,validate and plan
+displayName: Terraforminit,fmt,validate and plan
 pool: infra_pool
 
 steps:
