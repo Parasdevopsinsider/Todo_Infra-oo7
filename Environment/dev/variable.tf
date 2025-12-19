@@ -17,5 +17,3 @@ variable "nsg_devA" {}
 variable "sql_server_devA" {}
 
 variable "sql_database_devA" {}
-
-variable "bastion_devA" {}
