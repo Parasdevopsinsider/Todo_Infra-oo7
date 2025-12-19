@@ -1,0 +1,48 @@
+trigger:
+ branches:
+   include:
+     - main
+     - feature/*
+
+jobs:
+- job: Terraforminitplan
+displayname: Terraforminit,fmt,validate and plan
+pool: infra_pool
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Envirnoment/dev'
+    backendServiceArm: 'infra_connection'
+    backendAzureRmResourceGroupName: 'paras_rg'
+    backendAzureRmStorageAccountName: 'parasstg'
+    backendAzureRmContainerName: 'devcont'
+    backendAzureRmKey: 'dev.terraform.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'custom'
+    outputTo: 'console'
+    customCommand: 'fmt'
+    environmentServiceNameAzureRM: 'infra_connection'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Envirnoment/dev'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Envirnoment/dev'
+    environmentServiceNameAzureRM: 'infra_connection'
+
