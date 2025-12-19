@@ -5,6 +5,12 @@ terraform {
       version = "4.55.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "paras_rg"
+    storage_account_name = "parasstg"
+    container_name       = "devcont"
+    key                  = "dev.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
