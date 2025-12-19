@@ -64,6 +64,9 @@ jobs:
   dependsOn: TFSec_Scanner
 
   steps:
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: '1.5.7'
   - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
