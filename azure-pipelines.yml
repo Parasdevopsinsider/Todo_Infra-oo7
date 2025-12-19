@@ -79,11 +79,13 @@ jobs:
       backendAzureRmStorageAccountName: 'parasstg'
       backendAzureRmContainerName: 'devcont'
       backendAzureRmKey: 'dev.terraform.tfstate'
-  - task: TerraformTaskV4@4
+  
+  - task: TerraformTask@5
     inputs:
       provider: 'azurerm'
       command: 'apply'
       workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
+      commandOptions: '--auto-approve'
       environmentServiceNameAzureRM: 'infra_connection'
 
   
