@@ -78,7 +78,7 @@ nic_devA = {
 
 kv_devA = {
   "dev-kv-1" = {
-    kv_name                    = "dev-kv-001"
+    kv_name                    = "dev-kv-001abced"
     location                   = "West US"
     rg_name                    = "dev-rg-001"
     sku_name                   = "standard"
