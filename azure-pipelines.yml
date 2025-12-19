@@ -15,7 +15,7 @@ jobs:
       terraformVersion: '1.5.7'
 
   
-  - task: TerraformTask@5
+  - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
       command: 'init'
@@ -26,7 +26,7 @@ jobs:
       backendAzureRmContainerName: 'devcont'
       backendAzureRmKey: 'dev.terraform.tfstate'
 
-  - task: TerraformTask@5
+  - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
       command: 'custom'
@@ -35,13 +35,13 @@ jobs:
       customCommand: 'fmt'
       environmentServiceNameAzureRM: 'infra_connection'
 
-  - task: TerraformTask@5
+  - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
       command: 'validate'
       workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
 
-  - task: TerraformTask@5
+  - task: TerraformTaskV4@4
     inputs:
       provider: 'azurerm'
       command: 'plan'
