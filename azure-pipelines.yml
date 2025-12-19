@@ -50,7 +50,7 @@ jobs:
       workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
       environmentServiceNameAzureRM: 'infra_connection'
 
-- job: Scanner
+- job: TFSec_Scanner
   displayName: tfsec
 
   steps:
@@ -60,6 +60,7 @@ jobs:
 
 - job: Terraform_apply
   displayName: Terraform Apply
+  dependsOn: Terraforminitplan
 
   steps:
   - task: TerraformTask@5
